@@ -51,7 +51,7 @@ public class Contact {
     }
     	@Override
 	public String toString() {
-		return  "name=" + name + ", description=" + description + ",  "]";
+		return  "Contact [name=" + name + ", description=" + description + "]";
 	}
 
 }
