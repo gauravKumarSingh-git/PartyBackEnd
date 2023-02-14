@@ -14,7 +14,7 @@ public class EventDTO {
 	private String location;
 	
 	
-	
+	public EventDTO() {}
 	public EventDTO(int eventId, String eventName, String description, LocalDate date, LocalTime startTime,
 			LocalTime endTime, String location) {
 		super();

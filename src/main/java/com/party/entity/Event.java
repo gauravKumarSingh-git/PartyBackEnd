@@ -22,7 +22,7 @@ public class Event {
 	private String location;
 	
 	
-	
+	public Event() {}
 	public Event(int eventId, String eventName, String description, LocalDate date, LocalTime startTime,
 			LocalTime endTime, String location) {
 		super();
