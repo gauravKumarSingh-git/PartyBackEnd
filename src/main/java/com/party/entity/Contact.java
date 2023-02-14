@@ -1,5 +1,7 @@
 package com.party.entity;
 
+import java.util.*;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +32,26 @@ public class Contact {
     }
     public void setDescription(String description) {
 		this.description = description;
+	}
+    @Override
+	public int hashCode() {
+		return Objects.hash(description, name);
+	}
+    @Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		return Objects.equals(description, other.description)
+				&& Objects.equals(name, other.name);
+    }
+    	@Override
+	public String toString() {
+		return  "Contact [name=" + name + ", description=" + description + "]";
 	}
 
 }
