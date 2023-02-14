@@ -8,7 +8,7 @@ import com.party.exception.PartyException;
 public interface ContactService {
 	public String addContact(ContactDTO contact) throws PartyException;
 	public String updateContact(ContactDTO contact) throws PartyException;
-	public void deleteEvent(int eventId) throws PartyException;
+	public void deleteContact(ContactDTO contact) throws PartyException;
 	public List<ContactDTO> getContacts() throws PartyException;
 }
 
