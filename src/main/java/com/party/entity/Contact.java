@@ -14,11 +14,20 @@ public class Contact {
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private String name;
     private String description;
+	private int contactId;
 
-    public Contact(String name , String description) {
+    public Contact(int contactId, String name , String description) {
         this.name = name;
         this.description = description;
+		this.contactId = contactId;
     }
+
+	public int getContactId() {
+		return contactId;
+	}
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
+	}
 
     public String getName() {
         return name;
@@ -47,11 +56,11 @@ public class Contact {
 			return false;
 		Contact other = (Contact) obj;
 		return Objects.equals(description, other.description)
-				&& Objects.equals(name, other.name);
+				&& Objects.equals(name, other.name) && Objects.equals(contactId, other.contactId);
     }
     	@Override
 	public String toString() {
-		return  "Contact [name=" + name + ", description=" + description + "]";
+		return  "Contact [contactId=" + contactId + ",name=" + name + ", description=" + description + "]";
 	}
 
 }

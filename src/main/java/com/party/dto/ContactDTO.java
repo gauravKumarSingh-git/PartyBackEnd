@@ -5,14 +5,22 @@ public class ContactDTO {
 
     private String name;
 	private String description;
+	private int contactId;
+
 
     public ContactDTO() {}
-	public ContactDTO( String name , String description) {
+	public ContactDTO(int contactId, String name , String description) {
 		super();
+		this.contactId = contactId;
 		this.name = name;
-		this.description = description;     
+		this.description = description;   	
     }
-
+	public int getContactId() {
+		return contactId;
+	}
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
+	}
     public String getName() {
         return name;
     }
@@ -38,10 +46,11 @@ public class ContactDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactDTO other = (ContactDTO) obj;
-		return Objects.equals(description, other.description) && Objects.equals(name, other.name);
+		return Objects.equals(description, other.description) && Objects.equals(name, other.name)
+		&& Objects.equals(contactId, other.contactId);
     }
 	@Override
 	public String toString() {
-        return  "Contact [name=" + name + ", description=" + description + "]";
+		return  "Contact [contactId=" + contactId + ",name=" + name + ", description=" + description + "]";
 	}
 }
