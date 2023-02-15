@@ -1,5 +1,6 @@
 package com.party.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 public class UserDTO {
@@ -7,6 +8,7 @@ public class UserDTO {
 	private int userId;
 	private String userName;
 	private String password;
+	private List<ContactDTO> contacts;
 	
 	public UserDTO() {
 		super();
@@ -39,6 +41,12 @@ public class UserDTO {
 	
 	
 	
+	public List<ContactDTO> getContacts() {
+		return contacts;
+	}
+	public void setContacts(List<ContactDTO> contacts) {
+		this.contacts = contacts;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(password, userId, userName);

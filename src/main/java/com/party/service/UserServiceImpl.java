@@ -2,8 +2,10 @@ package com.party.service;
 
 import java.util.Optional;
 
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,8 @@ import com.party.repository.UserRepository;
 @Transactional
 public class UserServiceImpl implements UserService{
 	
+	public static final Log LOGGER = LogFactory.getLog(UserServiceImpl.class);
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -25,6 +29,9 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String addUser(UserDTO user) throws PartyException {
+		LOGGER.info(user);
+		modelMapper.getConfiguration()
+		  .setMatchingStrategy(MatchingStrategies.LOOSE);
 		Users userEntity =  modelMapper.map(user, Users.class);
 		Optional<Users> fromRepo = userRepository.findById(user.getUserId());
 		if(fromRepo.isPresent()) {

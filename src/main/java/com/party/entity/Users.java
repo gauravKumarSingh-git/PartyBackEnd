@@ -1,19 +1,33 @@
 package com.party.entity;
 
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="user_id")
 	private int userId;
+	@Column(name="user_name")
+	@JsonProperty("user_name")
 	private String userName;
 	private String password;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private List<Contact> contacts;
 	
 	public Users() {
 		super();
@@ -44,6 +58,12 @@ public class Users {
 		this.password = password;
 	}
 	
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(password, userId, userName);
