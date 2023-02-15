@@ -12,10 +12,11 @@ import jakarta.persistence.Id;
 public class Contact {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+    private int contactId;
     private String name;
     private String description;
-	private int contactId;
-
+	
+    public Contact() {}
     public Contact(int contactId, String name , String description) {
         this.name = name;
         this.description = description;

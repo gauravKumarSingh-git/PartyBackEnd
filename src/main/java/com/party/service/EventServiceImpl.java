@@ -42,9 +42,9 @@ public class EventServiceImpl implements EventService{
 		eventFromRepo.setEventName(event.getEventName());
 		eventFromRepo.setDescription(event.getDescription());
 		eventFromRepo.setDate(event.getDate());
+		eventFromRepo.setLocation(event.getLocation());
 		eventFromRepo.setStartTime(event.getStartTime());
 		eventFromRepo.setEndTime(event.getEndTime());
-		eventFromRepo.setLocation(event.getLocation());
 		return "Updated";
 	}
 
