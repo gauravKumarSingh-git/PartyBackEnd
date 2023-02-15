@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.party.dto.ContactDTO;
 import com.party.entity.Contact;
@@ -13,6 +14,7 @@ import com.party.exception.PartyException;
 import com.party.repository.ContactRepository;
 
 @Service
+@Transactional
 public class ContactServiceImpl implements ContactService {
 
     @Autowired
