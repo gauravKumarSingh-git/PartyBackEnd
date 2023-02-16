@@ -27,10 +27,10 @@ public class ContactDTO {
     public void setName(String name) {
 		this.name = name;   
 	}   
-    public String getdescription() {
+    public String getDescription() {
         return description;
     }
-    public void setdescription(String description) {
+    public void setDescription(String description) {
 		this.description = description;
     }
     @Override
