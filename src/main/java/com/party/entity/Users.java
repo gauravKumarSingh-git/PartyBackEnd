@@ -12,7 +12,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Users {
@@ -26,8 +29,11 @@ public class Users {
 	private String password;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
 	private List<Contact> contacts;
+	
+	@ManyToMany
+	@JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+	private List<Event> events;
 	
 	public Users() {
 		super();
@@ -63,6 +69,13 @@ public class Users {
 	}
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 	@Override
 	public int hashCode() {

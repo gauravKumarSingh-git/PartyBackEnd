@@ -1,5 +1,7 @@
 package com.party.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.logging.Log;
@@ -10,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.party.dto.ContactDTO;
 import com.party.dto.UserDTO;
+import com.party.entity.Contact;
 import com.party.entity.Users;
 import com.party.exception.PartyException;
 import com.party.repository.UserRepository;
@@ -47,7 +51,15 @@ public class UserServiceImpl implements UserService{
 		Users userFromRepo = fromRepo.orElseThrow(() -> new PartyException("Service.USER_NOT_FOUND"));
 		userFromRepo.setUserName(user.getUserName());
 		userFromRepo.setPassword(user.getPassword());
-		
+		List<ContactDTO> dtoList = user.getContacts();
+		LOGGER.info(dtoList);
+		List<Contact> newList = new ArrayList<>();
+		if(dtoList != null) {
+			dtoList.forEach((dto)->{
+				newList.add(modelMapper.map(dto, Contact.class));
+			});
+			userFromRepo.setContacts(newList);
+		}
 		return "Updated";
 		
 	}

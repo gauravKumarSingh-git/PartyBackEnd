@@ -44,6 +44,7 @@ public class UserAPI {
 	
 	@PutMapping("/user")
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO user ) throws PartyException {
+		LOGGER.info(user);
 		String ret = userService.updateUser(user);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}

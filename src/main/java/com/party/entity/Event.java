@@ -2,6 +2,7 @@ package com.party.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -27,6 +29,8 @@ public class Event {
 	private LocalTime endTime;
 	private String location;
 	
+	@ManyToMany(mappedBy = "events")
+	private List<Users> users;
 	
 	public Event() {}
 	public Event(int eventId, String eventName, String description, LocalDate date, LocalTime startTime,
@@ -81,6 +85,13 @@ public class Event {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public List<Users> getUsers() {
+		return users;
+	}
+	public void setUsers(List<Users> users) {
+		this.users = users;
 	}
 	@Override
 	public int hashCode() {
