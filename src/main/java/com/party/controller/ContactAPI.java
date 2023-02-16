@@ -18,25 +18,25 @@ public class ContactAPI {
     @Autowired
     private ContactService contactService;
 
-    @GetMapping
+    @GetMapping("/ViewAllContact")
     public ResponseEntity<List<ContactDTO>> getContacts() throws PartyException {
         List<ContactDTO> contacts = contactService.getContacts();
         return ResponseEntity.ok().body(contacts);
     }
 
-    @PostMapping
+    @PostMapping("/AddContact")
     public ResponseEntity<String> addContact(@RequestBody ContactDTO contactDTO) throws PartyException {
         String message = contactService.addContact(contactDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
-    @PutMapping
+    @PutMapping("/UpdateContact")
     public ResponseEntity<String> updateContact(@RequestBody ContactDTO contactDTO) throws PartyException {
         String message = contactService.updateContact(contactDTO);
         return ResponseEntity.ok().body(message);
     }
 
-    @DeleteMapping("/{contactId}")
+    @DeleteMapping("/DeleteContact")
     public ResponseEntity<String> deleteContact(@PathVariable int contactId) throws PartyException {
         contactService.deleteContact(contactId);
         return ResponseEntity.ok().body("Contact deleted successfully");
