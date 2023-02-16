@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,6 @@ import com.party.entity.Agenda;
 import com.party.exception.PartyException;
 import com.party.repository.AgendaRepository;
 
-import jakarta.transaction.Transactional;
 
 @Transactional
 @Service
