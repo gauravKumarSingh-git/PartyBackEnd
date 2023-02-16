@@ -3,12 +3,17 @@ package com.party.dto;
 import java.util.List;
 import java.util.Objects;
 
+import com.party.entity.Merchandise;
+
 public class UserDTO {
 	
 	private int userId;
 	private String userName;
 	private String password;
 	private List<ContactDTO> contacts;
+	private List<EventDTO> events;
+	private List<MerchandiseDTO> merchandises;
+	
 	
 	public UserDTO() {
 		super();
@@ -41,12 +46,25 @@ public class UserDTO {
 	
 	
 	
+	public List<MerchandiseDTO> getMerchandises() {
+		return merchandises;
+	}
+	public void setMerchandises(List<MerchandiseDTO> merchandises) {
+		this.merchandises = merchandises;
+	}
+	public List<EventDTO> getEvents() {
+		return events;
+	}
+	public void setEvents(List<EventDTO> events) {
+		this.events = events;
+	}
 	public List<ContactDTO> getContacts() {
 		return contacts;
 	}
 	public void setContacts(List<ContactDTO> contacts) {
 		this.contacts = contacts;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(password, userId, userName);

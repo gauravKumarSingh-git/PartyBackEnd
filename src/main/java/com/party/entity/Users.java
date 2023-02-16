@@ -31,9 +31,13 @@ public class Users {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Contact> contacts;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> events;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="user_merch", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
+	private List<Merchandise> merchandises;
 	
 	public Users() {
 		super();
@@ -76,6 +80,13 @@ public class Users {
 	}
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+	
+	public List<Merchandise> getMerchandises() {
+		return merchandises;
+	}
+	public void setMerchandises(List<Merchandise> merchandises) {
+		this.merchandises = merchandises;
 	}
 	@Override
 	public int hashCode() {

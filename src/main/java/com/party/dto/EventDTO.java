@@ -2,7 +2,10 @@ package com.party.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
+
+import com.party.entity.Users;
 
 public class EventDTO {
 	private int eventId;
@@ -12,7 +15,7 @@ public class EventDTO {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private String location;
-	
+//	private List<UserDTO> users;
 	
 	public EventDTO() {}
 	public EventDTO(int eventId, String eventName, String description, LocalDate date, LocalTime startTime,
@@ -68,6 +71,14 @@ public class EventDTO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	
+//	public List<UserDTO> getUsers() {
+//		return users;
+//	}
+//	public void setUsers(List<UserDTO> users) {
+//		this.users = users;
+//	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(date, description, endTime, eventId, eventName, location, startTime);

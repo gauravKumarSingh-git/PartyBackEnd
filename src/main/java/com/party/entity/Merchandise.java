@@ -1,11 +1,13 @@
 package com.party.entity;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Merchandise {
@@ -14,7 +16,8 @@ public class Merchandise {
 	private int itemId;
 	private String itemName;
 	private int price;
-	
+	@ManyToMany(mappedBy = "merchandises")
+	private List<Users> users;
 	
 	
 	public Merchandise() {
@@ -49,6 +52,17 @@ public class Merchandise {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
+	public List<Users> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(List<Users> users) {
+		this.users = users;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(itemId, itemName, price);

@@ -13,10 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.party.dto.ContactDTO;
+import com.party.dto.EventDTO;
+import com.party.dto.MerchandiseDTO;
 import com.party.dto.UserDTO;
 import com.party.entity.Contact;
+import com.party.entity.Event;
+import com.party.entity.Merchandise;
 import com.party.entity.Users;
 import com.party.exception.PartyException;
+import com.party.repository.EventRepository;
 import com.party.repository.UserRepository;
 
 @Service
@@ -29,11 +34,14 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	
 	@Autowired
+	private EventRepository eventRepository;
+	
+	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
 	public String addUser(UserDTO user) throws PartyException {
-		LOGGER.info(user);
+//		LOGGER.info(user);
 		modelMapper.getConfiguration()
 		  .setMatchingStrategy(MatchingStrategies.LOOSE);
 		Users userEntity =  modelMapper.map(user, Users.class);
@@ -51,14 +59,32 @@ public class UserServiceImpl implements UserService{
 		Users userFromRepo = fromRepo.orElseThrow(() -> new PartyException("Service.USER_NOT_FOUND"));
 		userFromRepo.setUserName(user.getUserName());
 		userFromRepo.setPassword(user.getPassword());
-		List<ContactDTO> dtoList = user.getContacts();
-		LOGGER.info(dtoList);
-		List<Contact> newList = new ArrayList<>();
-		if(dtoList != null) {
-			dtoList.forEach((dto)->{
-				newList.add(modelMapper.map(dto, Contact.class));
+		List<ContactDTO> contactDTO = user.getContacts();
+//		LOGGER.info(dtoList);
+		List<Contact> contacts = new ArrayList<>();
+		if(contactDTO != null) {
+			contactDTO.forEach((dto)->{
+				contacts.add(modelMapper.map(dto, Contact.class));
 			});
-			userFromRepo.setContacts(newList);
+			userFromRepo.setContacts(contacts);
+		}
+		List<EventDTO> eventDTO = user.getEvents();
+//		LOGGER.info(eventDTO);
+		List<Event> events = new ArrayList<>();
+		if(eventDTO != null) {
+			eventDTO.forEach((dto) -> {
+				events.add(modelMapper.map(dto, Event.class));
+			});
+			userFromRepo.setEvents(events);
+		}
+		
+		List<MerchandiseDTO> merchDTO = user.getMerchandises();
+		List<Merchandise> merch = new ArrayList<>();
+		if(merchDTO != null) {
+			merchDTO.forEach((dto) -> {
+				merch.add(modelMapper.map(dto, Merchandise.class));
+			});
+			userFromRepo.setMerchandises(merch);
 		}
 		return "Updated";
 		

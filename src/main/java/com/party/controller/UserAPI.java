@@ -37,14 +37,14 @@ public class UserAPI {
 	
 	@PostMapping("/user")
 	public ResponseEntity<String> addUser(@RequestBody UserDTO user) throws PartyException{
-		LOGGER.info(user);
+//		LOGGER.info(user);
 		String ret = userService.addUser(user);
 		return new ResponseEntity<> (ret, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/user")
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO user ) throws PartyException {
-		LOGGER.info(user);
+//		LOGGER.info(user);
 		String ret = userService.updateUser(user);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
