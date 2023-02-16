@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.party.dto.EventDTO;
@@ -23,6 +25,9 @@ public class EventTest {
 	
 	@Mock 
 	EventRepository eventRepository;
+	
+	@Mock
+	ModelMapper modelMapper;
 	
 	@InjectMocks
 	EventService eventService = new EventServiceImpl();
@@ -54,7 +59,40 @@ public class EventTest {
 	@Test
 	void validEventAddition() throws PartyException {
 		EventDTO event = EventTest.eventDTO();
+		Mockito.when(modelMapper.map(eventDTO(), Event.class)).thenReturn(event());
 		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.empty());
 		Assertions.assertEquals(eventService.addEvent(event), "Saved");
 	}
+	
+	@Test
+	void invalidEventAddition() throws PartyException {
+		EventDTO event = EventTest.eventDTO();
+		Mockito.when(modelMapper.map(eventDTO(), Event.class)).thenReturn(event());
+		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.of(event()));
+		PartyException ex = Assertions.assertThrows(PartyException.class, () -> eventService.addEvent(event));
+		Assertions.assertEquals(ex.getMessage(), "Service.EVENT_ALREADY_EXISTS");
+	}
+	
+	@Test
+	void validEventUpdate() throws PartyException {
+		EventDTO event = EventTest.eventDTO();
+		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.of(event()));
+		Assertions.assertEquals(eventService.updateEvent(event), "Updated");
+	}
+	
+	@Test
+	void invalidEventUpdate() throws PartyException {
+		EventDTO event = EventTest.eventDTO();
+		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.empty());
+		PartyException ex = Assertions.assertThrows(PartyException.class, () -> eventService.updateEvent(event));
+		Assertions.assertEquals(ex.getMessage(), "Service.EVENT_NOT_FOUND");
+	}
+	
+//	@Test
+//	void validViewEvent() throws PartyException {
+//		EventDTO event = EventTest.eventDTO();
+//		Mockito.when(modelMapper.map(event, Event.class)).thenReturn(event());
+//		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.of(EventTest.event()));
+//		Assertions.assertEquals( event, eventService.getEventById(event.getEventId()));
+//	}
 }
