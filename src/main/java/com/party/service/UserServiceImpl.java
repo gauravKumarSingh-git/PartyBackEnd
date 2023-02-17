@@ -42,12 +42,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String addUser(UserDTO user) throws PartyException {
 //		LOGGER.info(user);
-		modelMapper.getConfiguration()
-		  .setMatchingStrategy(MatchingStrategies.LOOSE);
+//		modelMapper.getConfiguration()
+//		  .setMatchingStrategy(MatchingStrategies.LOOSE);
 		Users userEntity =  modelMapper.map(user, Users.class);
 		Optional<Users> fromRepo = userRepository.findById(user.getUserId());
 		if(fromRepo.isPresent()) {
-			throw new PartyException("Service.EVENT_ALREADY_EXISTS");
+			throw new PartyException("Service.USER_ALREADY_EXISTS");
 		}
 		userRepository.save(userEntity);
 		return "Saved";
