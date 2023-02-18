@@ -10,10 +10,12 @@ public class UserDTO {
 	private int userId;
 	private String userName;
 	private String password;
+	private String firstName;
+	private String lastName;
 	private List<ContactDTO> contacts;
 	private List<EventDTO> events;
 	private List<MerchandiseDTO> merchandises;
-	
+	private String role;
 	
 	public UserDTO() {
 		super();
@@ -46,6 +48,24 @@ public class UserDTO {
 	
 	
 	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public List<MerchandiseDTO> getMerchandises() {
 		return merchandises;
 	}

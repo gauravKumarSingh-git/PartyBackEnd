@@ -59,6 +59,9 @@ public class UserServiceImpl implements UserService{
 		Users userFromRepo = fromRepo.orElseThrow(() -> new PartyException("Service.USER_NOT_FOUND"));
 		userFromRepo.setUserName(user.getUserName());
 		userFromRepo.setPassword(user.getPassword());
+		userFromRepo.setRole(user.getRole());
+		userFromRepo.setFirstName(user.getFirstName());
+		userFromRepo.setLastName(user.getLastName());
 		List<ContactDTO> contactDTO = user.getContacts();
 //		LOGGER.info(dtoList);
 		List<Contact> contacts = new ArrayList<>();
@@ -104,6 +107,16 @@ public class UserServiceImpl implements UserService{
 		Users user = fromRepo.orElseThrow(() -> new PartyException("Service.USER_NOT_FOUND"));
 		UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 		return userDTO;
+	}
+
+	@Override
+	public UserDTO getUserByUserNameAndPassword(String userName, String password) throws PartyException {
+		Optional<Users> fromRepo = userRepository.findByUserName(userName);
+		Users user = fromRepo.orElseThrow(() -> new PartyException("Service.USER_NOT_FOUND"));
+		if(!user.getPassword().equals(password)) {
+			throw new PartyException("Service.INCORRECT_PASSWORD");
+		}
+		return modelMapper.map(user, UserDTO.class);
 	}
 
 }

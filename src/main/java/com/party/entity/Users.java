@@ -27,15 +27,17 @@ public class Users {
 	@JsonProperty("user_name")
 	private String userName;
 	private String password;
-	
-	@OneToMany(cascade = CascadeType.ALL)
+	private String firstName;
+	private String lastName;
+	private String role;
+	@OneToMany(cascade = CascadeType.MERGE)
 	private List<Contact> contacts;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> events;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name="user_merch", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
 	private List<Merchandise> merchandises;
 	
@@ -87,6 +89,26 @@ public class Users {
 	}
 	public void setMerchandises(List<Merchandise> merchandises) {
 		this.merchandises = merchandises;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	@Override
 	public int hashCode() {

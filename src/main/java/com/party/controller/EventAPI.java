@@ -35,30 +35,30 @@ public class EventAPI {
 	@Autowired
 	Environment environment;
 	
-	@PostMapping("/event")
+	@PostMapping("/addEvent")
 	public ResponseEntity<String> addEvent(@RequestBody EventDTO event) throws PartyException{
 		String ret = eventService.addEvent(event);
 		return new ResponseEntity<>(ret, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/event")
+	@PutMapping("/updateEvent")
 	public ResponseEntity<String> updateEvent(@RequestBody EventDTO event) throws PartyException{
 		String ret = eventService.updateEvent(event);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/event/{eventId}")
+	@DeleteMapping("/deleteEvent/{eventId}")
 	public void deleteEvent(@PathVariable int eventId) throws PartyException {
 		eventService.deleteEvent(eventId);
 	}
 	
-	@GetMapping("/event/{eventId}")
+	@GetMapping("/getEvent/{eventId}")
 	public ResponseEntity<EventDTO> getById(@PathVariable int eventId) throws PartyException {
 		EventDTO ret = eventService.getEventById(eventId);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
-	@GetMapping("/event")
+	@GetMapping("/getEvents")
 	public ResponseEntity<List<EventDTO>> getEvents() throws PartyException{
 		List<EventDTO> ret = eventService.getEvents();
 		return new ResponseEntity<>(ret, HttpStatus.OK);

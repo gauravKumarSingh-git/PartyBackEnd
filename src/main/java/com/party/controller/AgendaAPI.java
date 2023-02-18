@@ -33,30 +33,30 @@ public class AgendaAPI {
 	@Autowired
 	Environment environment;
 	
-	@PostMapping("/agenda")
+	@PostMapping("/addAgenda")
 	public ResponseEntity<String> addAgenda(@RequestBody AgendaDTO agenda) throws PartyException {
 		String ret = agendaService.addAgenda(agenda);
 		return new ResponseEntity<>(ret, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/agenda")
+	@PutMapping("/updateAgenda")
 	public ResponseEntity<String> updateAgenda(@RequestBody AgendaDTO agenda) throws PartyException {
 		String ret = agendaService.updateAgenda(agenda);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/agenda/{agendaId}")
+	@DeleteMapping("/deleteAgenda/{agendaId}")
 	public void deleteAgenda(@PathVariable int agendaId) throws PartyException{
 		agendaService.deleteAgenda(agendaId);
 	}
 	
-	@GetMapping("/agenda/{agendaId}")
+	@GetMapping("/getAgenda/{agendaId}")
 	public ResponseEntity<AgendaDTO> getAgendaByID(@PathVariable int agendaId) throws PartyException{
 		AgendaDTO ret = agendaService.getAgendaById(agendaId);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
-	@GetMapping("/agenda")
+	@GetMapping("/getAgendas")
 	public ResponseEntity<List<AgendaDTO>> getAgendas() throws PartyException {
 		List<AgendaDTO> ret = agendaService.getAgendas();
 		return new ResponseEntity<>(ret, HttpStatus.OK);

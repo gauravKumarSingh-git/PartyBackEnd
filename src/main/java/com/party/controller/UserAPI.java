@@ -35,29 +35,34 @@ public class UserAPI {
 	@Autowired
 	Environment environment;
 	
-	@PostMapping("/user")
+	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserDTO user) throws PartyException{
 //		LOGGER.info(user);
 		String ret = userService.addUser(user);
 		return new ResponseEntity<> (ret, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/user")
+	@PutMapping("/updateUser")
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO user ) throws PartyException {
 //		LOGGER.info(user);
 		String ret = userService.updateUser(user);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/user/{userId}")
+	@DeleteMapping("/deleteUser/{userId}")
 	public void deleteUser(@PathVariable int userId) throws PartyException{
 		userService.deleteUser(userId);
 	}
 	
-	@GetMapping("user/{userId}")
+	@GetMapping("getUser/{userId}")
 	public ResponseEntity<UserDTO> getById(@PathVariable int userId) throws PartyException{
 		UserDTO ret = userService.getUserById(userId);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
+	@GetMapping("getUser/{userName}/{password}")
+	public ResponseEntity<UserDTO> getByUserNameAndPassword(@PathVariable String userName, @PathVariable String password) throws PartyException{
+		UserDTO ret = userService.getUserByUserNameAndPassword(userName, password);
+		return new ResponseEntity<>(ret, HttpStatus.OK);
+	}
 }

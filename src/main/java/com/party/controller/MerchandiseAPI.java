@@ -33,30 +33,30 @@ public class MerchandiseAPI {
 	@Autowired
 	Environment environment;
 	
-	@PostMapping("/Item")
+	@PostMapping("/addItem")
 	public ResponseEntity<String> addItem(@RequestBody MerchandiseDTO merchandiseDTO) throws PartyException {
 		String ret = merchandiseService.addItem(merchandiseDTO);
 		return new ResponseEntity<>(ret, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/Item")
+	@PutMapping("/updateItem")
 	public ResponseEntity<String> updateItem(@RequestBody MerchandiseDTO merchandise) throws PartyException {
 		String ret = merchandiseService.updateItem(merchandise);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/Item/{itemId}")
+	@DeleteMapping("/deleteItem/{itemId}")
 	public void deleteItem(@PathVariable int itemId) throws PartyException {
 		merchandiseService.deleteItem(itemId);
 	}
 	
-	@GetMapping("/Item")
+	@GetMapping("/getItems")
 	public ResponseEntity<List<MerchandiseDTO>> getAllItems() throws PartyException {
 		List<MerchandiseDTO> ret =  merchandiseService.getAllItems();
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
-	@GetMapping("/Item/{itemId}")
+	@GetMapping("/getItem/{itemId}")
 	public ResponseEntity<MerchandiseDTO> getItemById(@PathVariable int itemId) throws PartyException {
 		MerchandiseDTO ret = merchandiseService.getItemByID(itemId);
 		return new ResponseEntity<>(ret, HttpStatus.OK);

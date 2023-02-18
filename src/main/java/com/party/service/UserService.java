@@ -8,4 +8,5 @@ public interface UserService {
 	public String updateUser(UserDTO user) throws PartyException;
 	public void deleteUser(int userId) throws PartyException;
 	public UserDTO getUserById(int userId) throws PartyException;
+	public UserDTO getUserByUserNameAndPassword(String userName, String password) throws PartyException;
 }
