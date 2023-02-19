@@ -1,5 +1,6 @@
 package com.party.entity;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 
 
 @Entity
+
 
 public class Contact {
     @Id
@@ -19,6 +22,9 @@ public class Contact {
     private int contactId;
     private String name;
     private String description;
+
+	@ManyToMany(mappedBy = "events")
+	private List<Users> users;
 	
     public Contact() {}
     public Contact(int contactId, String name , String description) {
@@ -46,6 +52,12 @@ public class Contact {
     }
     public void setDescription(String description) {
 		this.description = description;
+	}
+	public List<Users> getUsers() {
+		return users;
+	}
+	public void setUsers(List<Users> users) {
+		this.users = users;
 	}
     @Override
 	public int hashCode() {
