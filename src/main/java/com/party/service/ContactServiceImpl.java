@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.dynamic.DynamicType.Builder.MethodDefinition.ImplementationDefinition.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +26,12 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public String addContact(ContactDTO contactDTO) throws PartyException {
-        Contact contact = modelMapper.map(contactDTO, Contact.class);
-        contactRepository.save(contact);
+        Contact contactEntity =  modelMapper.map(contactDTO, Contact.class);
+		java.util.Optional<Contact> fromRepo = contactRepository.findById(contactDTO.getContactId());
+		if(fromRepo.isPresent()) {
+			throw new PartyException("Service.Contact_ALREADY_EXISTS");
+		}
+		contactRepository.save(contactEntity);
         return "Contact added successfully";
     }
 
