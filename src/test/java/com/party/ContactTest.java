@@ -80,11 +80,4 @@ public class ContactTest {
 		Assertions.assertEquals(ex.getMessage(), "Contact not found");
 	}
 	
-//	@Test
-//	void validViewEvent() throws PartyException {
-//		ContactDTO contact = ContactTest.contactDTO();
-//		Mockito.when(modelMapper.map(contact, Event.class)).thenReturn(contact());
-//		Mockito.when(contactRepository.findById(contact.getEventId())).thenReturn(Optional.of(ContactTest.contact()));
-//		Assertions.assertEquals( contact, contactService.getEventById(contact.getEventId()));
-//	}
 }
