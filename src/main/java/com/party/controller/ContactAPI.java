@@ -13,6 +13,7 @@ import com.party.service.ContactService;
 
 @RestController
 @RequestMapping("/api/contacts")
+@CrossOrigin("*")
 public class ContactAPI {
 
     @Autowired

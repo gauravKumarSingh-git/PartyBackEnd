@@ -119,5 +119,15 @@ public class UserServiceImpl implements UserService{
 		return modelMapper.map(user, UserDTO.class);
 	}
 
+	@Override
+	public List<UserDTO> getUsers() throws PartyException {
+		List<Users> users = userRepository.findAll();
+		List<UserDTO> ret = new ArrayList<>();
+		users.forEach((user) -> {
+			ret.add(modelMapper.map(user, UserDTO.class));
+		});
+		return ret;
+	}
+
 }
 

@@ -1,5 +1,7 @@
 package com.party.controller;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,12 @@ public class UserAPI {
 	@GetMapping("getUser/{userId}")
 	public ResponseEntity<UserDTO> getById(@PathVariable int userId) throws PartyException{
 		UserDTO ret = userService.getUserById(userId);
+		return new ResponseEntity<>(ret, HttpStatus.OK);
+	}
+	
+	@GetMapping("getAllUsers")
+	public ResponseEntity<List<UserDTO>> getAllUsers() throws PartyException {
+		List<UserDTO> ret = userService.getUsers();
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
