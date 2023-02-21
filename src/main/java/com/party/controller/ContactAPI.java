@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.party.dto.ContactDTO;
@@ -14,6 +15,7 @@ import com.party.service.ContactService;
 @RestController
 @RequestMapping("/api/contacts")
 @CrossOrigin("*")
+@Validated
 public class ContactAPI {
 
     @Autowired
