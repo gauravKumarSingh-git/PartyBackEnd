@@ -87,11 +87,4 @@ public class MerchandiseTest {
 		Assertions.assertEquals(ex.getMessage(), "Service.MERCH_NOT_PRESENT");
 	}
 	
-//	@Test
-//	void validViewEvent() throws PartyException {
-//		EventDTO event = EventTest.eventDTO();
-//		Mockito.when(modelMapper.map(event, Event.class)).thenReturn(event());
-//		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.of(EventTest.event()));
-//		Assertions.assertEquals( event, eventService.getEventById(event.getEventId()));
-//	}
 }
