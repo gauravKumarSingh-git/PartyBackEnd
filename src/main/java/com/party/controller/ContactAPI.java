@@ -21,11 +21,25 @@ public class ContactAPI {
     @Autowired
     private ContactService contactService;
 
+    /**
+	 * View contact queries of the database
+	 * @param contact
+	 * @return
+	 * @throws PartyException
+	 */
+
     @GetMapping("/ViewAllContact")
     public ResponseEntity<List<ContactDTO>> getContacts() throws PartyException {
         List<ContactDTO> contacts = contactService.getContacts();
         return ResponseEntity.ok().body(contacts);
     }
+
+    /**
+	 * Add Contact Query To the database
+	 * @param contact
+	 * @return
+	 * @throws PartyException
+	 */
 
     @PostMapping("/AddContact")
     public ResponseEntity<String> addContact(@RequestBody ContactDTO contactDTO) throws PartyException {
@@ -33,11 +47,24 @@ public class ContactAPI {
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
+      /**
+	 * Update Contact Query To the database
+	 * @param contact
+	 * @return
+	 * @throws PartyException
+	 */
+
     @PutMapping("/UpdateContact")
     public ResponseEntity<String> updateContact(@RequestBody ContactDTO contactDTO) throws PartyException {
         String message = contactService.updateContact(contactDTO);
         return ResponseEntity.ok().body(message);
     }
+
+      /**
+	 * Delete Contact Query from the database
+	 * @param contact
+	 * @throws PartyException
+	 */
 
     @DeleteMapping("/DeleteContact")
     public ResponseEntity<String> deleteContact(@PathVariable int contactId) throws PartyException {

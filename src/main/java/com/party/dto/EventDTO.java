@@ -2,10 +2,7 @@ package com.party.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Objects;
-
-import com.party.entity.Users;
 
 public class EventDTO {
 	private int eventId;

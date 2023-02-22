@@ -1,21 +1,11 @@
 package com.party.dto;
 
-import java.util.List;
 import java.util.Objects;
-
-import com.party.entity.Users;
 
 public class MerchandiseDTO {
 	private int itemId;
 	private String itemName;
 	private int price;
-//	private List<UserDTO> users;
-	
-	public MerchandiseDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
 	
 	public MerchandiseDTO(int itemId, String itemName, int price) {
 		super();
@@ -43,20 +33,6 @@ public class MerchandiseDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
-	
-
-
-//	public List<UserDTO> getUsers() {
-//		return users;
-//	}
-//
-//
-//	public void setUsers(List<UserDTO> users) {
-//		this.users = users;
-//	}
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(itemId, itemName, price);

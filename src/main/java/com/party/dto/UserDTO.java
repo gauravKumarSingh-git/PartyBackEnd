@@ -3,8 +3,6 @@ package com.party.dto;
 import java.util.List;
 import java.util.Objects;
 
-import com.party.entity.Merchandise;
-
 public class UserDTO {
 	
 	private int userId;
