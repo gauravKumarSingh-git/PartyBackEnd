@@ -15,7 +15,6 @@ public class EventDTO {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private String location;
-//	private List<UserDTO> users;
 	
 	public EventDTO() {}
 	public EventDTO(int eventId, String eventName, String description, LocalDate date, LocalTime startTime,
@@ -72,13 +71,6 @@ public class EventDTO {
 		this.location = location;
 	}
 	
-	
-//	public List<UserDTO> getUsers() {
-//		return users;
-//	}
-//	public void setUsers(List<UserDTO> users) {
-//		this.users = users;
-//	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(date, description, endTime, eventId, eventName, location, startTime);
