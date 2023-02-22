@@ -35,29 +35,57 @@ public class EventAPI {
 	@Autowired
 	Environment environment;
 	
+	/**
+	 * Add Event To the database
+	 * @param event
+	 * @return
+	 * @throws PartyException
+	 */
 	@PostMapping("/addEvent")
 	public ResponseEntity<String> addEvent(@RequestBody EventDTO event) throws PartyException{
 		String ret = eventService.addEvent(event);
 		return new ResponseEntity<>(ret, HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Update Event that is already present in database
+	 * @param event
+	 * @return
+	 * @throws PartyException
+	 */
 	@PutMapping("/updateEvent")
 	public ResponseEntity<String> updateEvent(@RequestBody EventDTO event) throws PartyException{
 		String ret = eventService.updateEvent(event);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
+	/**
+	 * Delete event that is present in database 
+	 * @param eventId
+	 * @throws PartyException
+	 */
 	@DeleteMapping("/deleteEvent/{eventId}")
 	public void deleteEvent(@PathVariable int eventId) throws PartyException {
 		eventService.deleteEvent(eventId);
 	}
 	
+	/**
+	 * Get event based on event ID
+	 * @param eventId
+	 * @return
+	 * @throws PartyException
+	 */
 	@GetMapping("/getEvent/{eventId}")
 	public ResponseEntity<EventDTO> getById(@PathVariable int eventId) throws PartyException {
 		EventDTO ret = eventService.getEventById(eventId);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
 	
+	/**
+	 * Get all the events that are peresent in database
+	 * @return
+	 * @throws PartyException
+	 */
 	@GetMapping("/getEvents")
 	public ResponseEntity<List<EventDTO>> getEvents() throws PartyException{
 		List<EventDTO> ret = eventService.getEvents();
