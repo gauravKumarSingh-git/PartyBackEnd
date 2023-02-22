@@ -26,7 +26,6 @@ import com.party.service.EventService;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
-@Validated
 public class EventAPI {
 	
 	@Autowired

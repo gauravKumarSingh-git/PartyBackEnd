@@ -24,7 +24,6 @@ import com.party.service.AgendaService;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
-@Validated
 public class AgendaAPI {
 	
 	@Autowired
