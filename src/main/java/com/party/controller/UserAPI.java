@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.party.dto.UserDTO;
+import com.party.entity.Users;
 import com.party.exception.PartyException;
 import com.party.service.UserService;
 import com.party.service.UserServiceImpl;
@@ -39,14 +40,12 @@ public class UserAPI {
 	
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserDTO user) throws PartyException{
-//		LOGGER.info(user);
 		String ret = userService.addUser(user);
 		return new ResponseEntity<> (ret, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/updateUser")
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO user ) throws PartyException {
-//		LOGGER.info(user);
 		String ret = userService.updateUser(user);
 		return new ResponseEntity<>(ret, HttpStatus.OK);
 	}
