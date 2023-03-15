@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Merchandise {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int itemId;
 	private String itemName;
 	private int price;

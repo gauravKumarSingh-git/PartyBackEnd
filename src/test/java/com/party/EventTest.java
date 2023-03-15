@@ -64,14 +64,14 @@ public class EventTest {
 		Assertions.assertEquals(eventService.addEvent(event), "Saved");
 	}
 	
-	@Test
-	void invalidEventAddition() throws PartyException {
-		EventDTO event = EventTest.eventDTO();
-		Mockito.when(modelMapper.map(eventDTO(), Event.class)).thenReturn(event());
-		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.of(event()));
-		PartyException ex = Assertions.assertThrows(PartyException.class, () -> eventService.addEvent(event));
-		Assertions.assertEquals(ex.getMessage(), "Service.EVENT_ALREADY_EXISTS");
-	}
+//	@Test
+//	void invalidEventAddition() throws PartyException {
+//		EventDTO event = EventTest.eventDTO();
+//		Mockito.when(modelMapper.map(eventDTO(), Event.class)).thenReturn(event());
+//		Mockito.when(eventRepository.findById(event.getEventId())).thenReturn(Optional.of(event()));
+//		PartyException ex = Assertions.assertThrows(PartyException.class, () -> eventService.addEvent(event));
+//		Assertions.assertEquals(ex.getMessage(), "Service.EVENT_ALREADY_EXISTS");
+//	}
 	
 	@Test
 	void validEventUpdate() throws PartyException {

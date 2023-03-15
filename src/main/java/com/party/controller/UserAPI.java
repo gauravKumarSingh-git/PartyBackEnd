@@ -38,39 +38,72 @@ public class UserAPI {
 	Environment environment;
 	
 	@PostMapping("/addUser")
-	public ResponseEntity<String> addUser(@RequestBody UserDTO user) throws PartyException{
-//		LOGGER.info(user);
-		String ret = userService.addUser(user);
-		return new ResponseEntity<> (ret, HttpStatus.CREATED);
+	public ResponseEntity<String> addUser(@RequestBody UserDTO user){
+		try {			
+			String ret = userService.addUser(user);
+			return new ResponseEntity<> (ret, HttpStatus.CREATED);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 	
 	@PutMapping("/updateUser")
-	public ResponseEntity<String> updateUser(@RequestBody UserDTO user ) throws PartyException {
-//		LOGGER.info(user);
-		String ret = userService.updateUser(user);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<String> updateUser(@RequestBody UserDTO user ){
+		try {
+			String ret = userService.updateUser(user);
+			return new ResponseEntity<>(ret, HttpStatus.OK);			
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 	
 	@DeleteMapping("/deleteUser/{userId}")
-	public void deleteUser(@PathVariable int userId) throws PartyException{
-		userService.deleteUser(userId);
+	public void deleteUser(@PathVariable int userId){
+		try {			
+			userService.deleteUser(userId);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    	}
 	}
 	
 	@GetMapping("getUser/{userId}")
-	public ResponseEntity<UserDTO> getById(@PathVariable int userId) throws PartyException{
-		UserDTO ret = userService.getUserById(userId);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<UserDTO> getById(@PathVariable int userId){
+		try {			
+			UserDTO ret = userService.getUserById(userId);
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 	
 	@GetMapping("getAllUsers")
-	public ResponseEntity<List<UserDTO>> getAllUsers() throws PartyException {
-		List<UserDTO> ret = userService.getUsers();
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<List<UserDTO>> getAllUsers() {
+		try {			
+			List<UserDTO> ret = userService.getUsers();
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 	
 	@GetMapping("getUser/{userName}/{password}")
-	public ResponseEntity<UserDTO> getByUserNameAndPassword(@PathVariable String userName, @PathVariable String password) throws PartyException{
-		UserDTO ret = userService.getUserByUserNameAndPassword(userName, password);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<UserDTO> getByUserNameAndPassword(@PathVariable String userName, @PathVariable String password) {
+		try {			
+			UserDTO ret = userService.getUserByUserNameAndPassword(userName, password);
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 }

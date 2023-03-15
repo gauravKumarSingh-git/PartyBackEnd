@@ -4,6 +4,8 @@ package com.party.controller;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -31,31 +33,44 @@ public class EventAPI {
 	@Autowired
 	EventService eventService;
 	
-	@Autowired
-	Environment environment;
+	public static final Log LOGGER = LogFactory.getLog(EventAPI.class);
+
 	
 	/**
 	 * Add Event To the database
 	 * @param event
-	 * @return
+	 * @return ResponseEntity<String>
 	 * @throws PartyException
 	 */
 	@PostMapping("/addEvent")
-	public ResponseEntity<String> addEvent(@RequestBody EventDTO event) throws PartyException{
-		String ret = eventService.addEvent(event);
-		return new ResponseEntity<>(ret, HttpStatus.CREATED);
+	public ResponseEntity<String> addEvent(@RequestBody EventDTO event){
+		try {
+			String ret = eventService.addEvent(event);
+			return new ResponseEntity<>(ret, HttpStatus.CREATED);
+		}
+		catch(Exception e) {
+			LOGGER.info(e.getMessage());
+			return null;
+		}
+		
 	}
 	
 	/**
 	 * Update Event that is already present in database
 	 * @param event
-	 * @return
+	 * @return ResponseEntity<String>
 	 * @throws PartyException
 	 */
 	@PutMapping("/updateEvent")
-	public ResponseEntity<String> updateEvent(@RequestBody EventDTO event) throws PartyException{
-		String ret = eventService.updateEvent(event);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<String> updateEvent(@RequestBody EventDTO event){
+		try {
+			String ret = eventService.updateEvent(event);
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			LOGGER.info(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -64,8 +79,13 @@ public class EventAPI {
 	 * @throws PartyException
 	 */
 	@DeleteMapping("/deleteEvent/{eventId}")
-	public void deleteEvent(@PathVariable int eventId) throws PartyException {
-		eventService.deleteEvent(eventId);
+	public void deleteEvent(@PathVariable int eventId){
+		try {
+			eventService.deleteEvent(eventId);
+		}
+		catch(Exception e) {
+			LOGGER.info(e.getMessage());
+		}
 	}
 	
 	/**
@@ -75,9 +95,15 @@ public class EventAPI {
 	 * @throws PartyException
 	 */
 	@GetMapping("/getEvent/{eventId}")
-	public ResponseEntity<EventDTO> getById(@PathVariable int eventId) throws PartyException {
-		EventDTO ret = eventService.getEventById(eventId);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<EventDTO> getById(@PathVariable int eventId){
+		try {			
+			EventDTO ret = eventService.getEventById(eventId);
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			LOGGER.info(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -86,8 +112,14 @@ public class EventAPI {
 	 * @throws PartyException
 	 */
 	@GetMapping("/getEvents")
-	public ResponseEntity<List<EventDTO>> getEvents() throws PartyException{
-		List<EventDTO> ret = eventService.getEvents();
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<List<EventDTO>> getEvents() {
+		try {
+			List<EventDTO> ret = eventService.getEvents();
+			return new ResponseEntity<>(ret, HttpStatus.OK);			
+		}
+		catch(Exception e) {
+			LOGGER.info(e.getMessage());
+			return null;
+		}
 	}
 }

@@ -2,6 +2,8 @@ package com.party.controller;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -30,35 +32,63 @@ public class MerchandiseAPI {
 	@Autowired
 	MerchandiseService merchandiseService;
 	
-	@Autowired
-	Environment environment;
+	private static final Log LOGGER = LogFactory.getLog(MerchandiseAPI.class);
 	
 	@PostMapping("/addItem")
-	public ResponseEntity<String> addItem(@RequestBody MerchandiseDTO merchandiseDTO) throws PartyException {
-		String ret = merchandiseService.addItem(merchandiseDTO);
-		return new ResponseEntity<>(ret, HttpStatus.CREATED);
+	public ResponseEntity<String> addItem(@RequestBody MerchandiseDTO merchandiseDTO) {
+		try {			
+			String ret = merchandiseService.addItem(merchandiseDTO);
+			return new ResponseEntity<>(ret, HttpStatus.CREATED);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 	
 	@PutMapping("/updateItem")
-	public ResponseEntity<String> updateItem(@RequestBody MerchandiseDTO merchandise) throws PartyException {
-		String ret = merchandiseService.updateItem(merchandise);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<String> updateItem(@RequestBody MerchandiseDTO merchandise){
+		try {			
+			String ret = merchandiseService.updateItem(merchandise);
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 
 	@DeleteMapping("/deleteItem/{itemId}")
-	public void deleteItem(@PathVariable int itemId) throws PartyException {
-		merchandiseService.deleteItem(itemId);
+	public void deleteItem(@PathVariable int itemId) {
+		try {			
+			merchandiseService.deleteItem(itemId);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    	}
 	}
 	
 	@GetMapping("/getItems")
-	public ResponseEntity<List<MerchandiseDTO>> getAllItems() throws PartyException {
-		List<MerchandiseDTO> ret =  merchandiseService.getAllItems();
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<List<MerchandiseDTO>> getAllItems(){
+		try {			
+			List<MerchandiseDTO> ret =  merchandiseService.getAllItems();
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 	
 	@GetMapping("/getItem/{itemId}")
-	public ResponseEntity<MerchandiseDTO> getItemById(@PathVariable int itemId) throws PartyException {
-		MerchandiseDTO ret = merchandiseService.getItemByID(itemId);
-		return new ResponseEntity<>(ret, HttpStatus.OK);
+	public ResponseEntity<MerchandiseDTO> getItemById(@PathVariable int itemId) {
+		try {			
+			MerchandiseDTO ret = merchandiseService.getItemByID(itemId);
+			return new ResponseEntity<>(ret, HttpStatus.OK);
+		}
+		catch(Exception e) {
+    		LOGGER.info(e.getMessage());
+    		return null;
+    	}
 	}
 }

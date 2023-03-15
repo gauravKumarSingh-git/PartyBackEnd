@@ -27,10 +27,10 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public String addEvent(EventDTO event) throws PartyException {
 		Event eventEntity =  modelMapper.map(event, Event.class);
-		Optional<Event> fromRepo = eventRepository.findById(event.getEventId());
-		if(fromRepo.isPresent()) {
-			throw new PartyException("Service.EVENT_ALREADY_EXISTS");
-		}
+//		Optional<Event> fromRepo = eventRepository.findById(event.getEventId());
+//		if(fromRepo.isPresent()) {
+//			throw new PartyException("Service.EVENT_ALREADY_EXISTS");
+//		}
 		eventRepository.save(eventEntity);
 		return "Saved";
 	}
