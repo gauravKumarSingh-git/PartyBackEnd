@@ -24,6 +24,12 @@ public class ContactAPI {
     private ContactService contactService;
     
     public static final Log LOGGER = LogFactory.getLog(ContactAPI.class);
+    /**
+ 	 * View contact queries of the database
+ 	 * @param contact
+ 	 * @return
+ 	 * @throws PartyException
+ 	 */
 
     @GetMapping("/ViewAllContact")
     public ResponseEntity<List<ContactDTO>> getContacts() {
@@ -36,6 +42,13 @@ public class ContactAPI {
     		return null;
     	}
     }
+    
+    /**
+   	 * Add Contact Query To the database
+   	 * @param contact
+   	 * @return
+   	 * @throws PartyException
+   	 */
 
     @PostMapping("/AddContact")
     public ResponseEntity<String> addContact(@RequestBody ContactDTO contactDTO) {
@@ -48,6 +61,13 @@ public class ContactAPI {
     		return null;
     	}
     }
+    
+    /**
+ 	 * Update Contact Query To the database
+ 	 * @param contact
+ 	 * @return
+ 	 * @throws PartyException
+ 	 */
 
     @PutMapping("/UpdateContact")
     public ResponseEntity<String> updateContact(@RequestBody ContactDTO contactDTO){
@@ -60,6 +80,12 @@ public class ContactAPI {
     		return null;
     	}
     }
+    
+    /**
+   	 * Delete Contact Query from the database
+   	 * @param contact
+   	 * @throws PartyException
+   	 */
 
     @DeleteMapping("/DeleteContact")
     public ResponseEntity<String> deleteContact(@PathVariable int contactId) {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.party.dto.UserDTO;
+import com.party.entity.Users;
 import com.party.exception.PartyException;
 import com.party.service.UserService;
 import com.party.service.UserServiceImpl;

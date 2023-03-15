@@ -34,16 +34,10 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	
 	@Autowired
-	private EventRepository eventRepository;
-	
-	@Autowired
 	private ModelMapper modelMapper;
 
 	@Override
 	public String addUser(UserDTO user) throws PartyException {
-//		LOGGER.info(user);
-//		modelMapper.getConfiguration()
-//		  .setMatchingStrategy(MatchingStrategies.LOOSE);
 		Users userEntity =  modelMapper.map(user, Users.class);
 		Optional<Users> fromRepo = userRepository.findById(user.getUserId());
 		if(fromRepo.isPresent()) {
@@ -63,7 +57,6 @@ public class UserServiceImpl implements UserService{
 		userFromRepo.setFirstName(user.getFirstName());
 		userFromRepo.setLastName(user.getLastName());
 		List<ContactDTO> contactDTO = user.getContacts();
-//		LOGGER.info(dtoList);
 		List<Contact> contacts = new ArrayList<>();
 		if(contactDTO != null) {
 			contactDTO.forEach((dto)->{
@@ -72,7 +65,6 @@ public class UserServiceImpl implements UserService{
 			userFromRepo.setContacts(contacts);
 		}
 		List<EventDTO> eventDTO = user.getEvents();
-//		LOGGER.info(eventDTO);
 		List<Event> events = new ArrayList<>();
 		if(eventDTO != null) {
 			eventDTO.forEach((dto) -> {
@@ -101,6 +93,7 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	
 	@Override
 	public UserDTO getUserById(int userId) throws PartyException {
 		Optional<Users> fromRepo = userRepository.findById(userId);
